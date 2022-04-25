@@ -20,5 +20,12 @@
   "bugs": {
     "url": "https://github.com/nachomartin31/tasked/issues"
   },
-  "homepage": "https://github.com/nachomartin31/tasked#readme"
+  "homepage": "https://github.com/nachomartin31/tasked#readme",
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "debug": "^4.3.4",
+    "express": "^4.17.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
+  }
 }

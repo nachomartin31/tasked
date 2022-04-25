@@ -4,13 +4,9 @@ const debug = require("debug")("tasked");
 const morgan = require("morgan");
 
 const server = express();
+const port = process.env.PORT || 4000;
 
 server.use(morgan("dev"));
 server.use(express.json());
 
-const port = process.env.PORT || 4000;
-
-server.listen(
-  port,
-  debug(`Server is running on port ${port}`)
-);
+server.listen(port, () => { debug(`Server is running on port ${port}`); });

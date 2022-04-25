@@ -1,0 +1,24 @@
+{
+  "name": "tasked",
+  "version": "1.0.0",
+  "description": "Task manager created with MERN stack and implementing socket.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nachomartin31/tasked.git"
+  },
+  "keywords": [
+    "MERN",
+    "task",
+    "manager"
+  ],
+  "author": "Nacho Martín",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nachomartin31/tasked/issues"
+  },
+  "homepage": "https://github.com/nachomartin31/tasked#readme"
+}

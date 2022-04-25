@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const debug = require("debug")("tasked");
 const morgan = require("morgan");

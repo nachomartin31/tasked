@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Task manager server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nachomartin31/tasked.git"
+  },
+  "keywords": [
+    "MERN",
+    "NODE",
+    "EXPRESS",
+    "MONGODB",
+    "TASK_MANAGER",
+    "PROJECT_MANAGER"
+  ],
+  "author": "Nacho Martín",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nachomartin31/tasked/issues"
+  },
+  "homepage": "https://github.com/nachomartin31/tasked#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}

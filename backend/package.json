@@ -4,7 +4,8 @@
   "description": "Task manager server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js",
+    "debug": "nodemon --inspect-brk index.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,9 @@
   },
   "homepage": "https://github.com/nachomartin31/tasked#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "debug": "^4.3.4",
+    "express": "^4.17.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
   }
 }

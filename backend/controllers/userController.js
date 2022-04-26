@@ -28,8 +28,7 @@ const createUser = async ({ body }, res) => {
   }
 };
 
-const logIn = async ({ body }, res) => {
-  const { email, password } = body;
+const logIn = async ({ body: { email, password } }, res) => {
   const user = await User.findOne({ email });
   let status;
   let result;
@@ -58,8 +57,42 @@ const logIn = async ({ body }, res) => {
   return res.status(status).json(result);
 };
 
+const confirm = async ({ params: { token } }, res) => {
+  const user = await User.findOne({ token });
+  if (user) {
+    try {
+      user.confirmedAccount = true;
+      user.token = "";
+      user.save();
+      return res.json(user);
+    } catch (error) {
+      error.message = "Server did not respond";
+      return res.status(500).json({ message: error.message });
+    }
+  }
+  const error = new Error("Invalid token");
+  return res.status(404).json({ message: error.message });
+};
+
+const resetPassword = async ({ body: { email } }, res) => {
+  const user = await User.findOne({ email });
+  if (!user) {
+    const error = new Error("User not found");
+    return res.status(404).json({ message: error.message });
+  }
+  try {
+    user.token = generateId();
+    await user.save();
+    return res.json({ message: "Sent email to reset password" });
+  } catch (error) {
+    error.message = "Server did not respond";
+    return res.status(500).json({ message: error.message });
+  }
+};
 module.exports = {
   getUser,
   createUser,
-  logIn
+  logIn,
+  confirm,
+  resetPassword
 };

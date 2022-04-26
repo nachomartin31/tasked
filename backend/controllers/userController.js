@@ -12,7 +12,7 @@ const getUser = async ({ query }, res) => {
 
 const createUser = async ({ body }, res) => {
   const { email } = body;
-  const alreadySignedUp = User.findOne({ email });
+  const alreadySignedUp = await User.findOne({ email });
   if (alreadySignedUp) {
     const error = new Error("This email is already signed");
     res.status(400).json({ message: error.message });

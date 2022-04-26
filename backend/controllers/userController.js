@@ -5,7 +5,7 @@ const { generateJWT } = require("../helpers/generateJWT");
 const getUser = async ({ query }, res) => {
   try {
     const user = await User.find(query);
-    res.json(user);
+    res.status(200).json(user);
   } catch (error) {
     res.status(500);
     res.send(error);
@@ -21,7 +21,7 @@ const createUser = async ({ body }, res) => {
   }
   try {
     const newUser = await User.create({ ...body, token: generateId() });
-    res.json(newUser);
+    res.status(201).json(newUser);
   } catch {
     const error = new Error("Server did not respond");
     res.status(500).json({ message: error.message });
@@ -64,7 +64,7 @@ const confirm = async ({ params: { token } }, res) => {
       user.confirmedAccount = true;
       user.token = "";
       user.save();
-      return res.json(user);
+      return res.status(200).json(user);
     } catch (error) {
       error.message = "Server did not respond";
       return res.status(500).json({ message: error.message });
@@ -83,16 +83,26 @@ const resetPassword = async ({ body: { email } }, res) => {
   try {
     user.token = generateId();
     await user.save();
-    return res.json({ message: "Sent email to reset password" });
+    return res.status(200).json({ message: "Sent email to reset password" });
   } catch (error) {
     error.message = "Server did not respond";
     return res.status(500).json({ message: error.message });
   }
+};
+
+const checkToken = async ({ params: { token } }, res) => {
+  const validToken = await User.findOne({ token });
+  if (!validToken) {
+    const error = new Error("Invalid token");
+    return res.status(404).json({ message: error.message });
+  }
+  return res.status(200).json({ message: "Token verified" });
 };
 module.exports = {
   getUser,
   createUser,
   logIn,
   confirm,
-  resetPassword
+  resetPassword,
+  checkToken
 };

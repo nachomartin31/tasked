@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/nachomartin31/tasked#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "chalk": "^4.1.2",
     "debug": "^4.3.4",
     "dotenv": "^16.0.0",

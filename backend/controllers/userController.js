@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const { generateId } = require("../helpers/generateId");
 
 const getUser = async ({ query }, res) => {
   try {
@@ -18,7 +19,7 @@ const createUser = async ({ body }, res) => {
     res.status(400).json({ message: error.message });
   }
   try {
-    const newUser = await User.create(body);
+    const newUser = await User.create({ ...body, token: generateId() });
     res.json(newUser);
   } catch {
     const error = new Error("Server did not respond");

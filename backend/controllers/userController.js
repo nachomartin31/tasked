@@ -98,11 +98,41 @@ const checkToken = async ({ params: { token } }, res) => {
   }
   return res.status(200).json({ message: "Token verified" });
 };
+
+const newPassword = async ({ params: { token }, body: { password } }, res) => {
+  try {
+    const user = await User.findOne({ token });
+    if (!user) {
+      const error = new Error("Invalid token");
+      return res.status(404).json({ message: error.message });
+    }
+    user.password = password;
+    user.token = "";
+    user.save();
+    return res.status(200).json({ message: "Password reset" });
+  } catch (error) {
+    error.message = "Server did not respond";
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+const profile = async ({ body: { email, password } }, res) => {
+  const user = await User.findOne({ email });
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  if (await user.checkPassword(password) === false) {
+    return res.status(403).json({ message: "Invalid password" });
+  }
+  return res.status(200).json(user);
+};
 module.exports = {
   getUser,
   createUser,
   logIn,
   confirm,
   resetPassword,
-  checkToken
+  checkToken,
+  newPassword,
+  profile
 };

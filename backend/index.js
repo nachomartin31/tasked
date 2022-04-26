@@ -12,4 +12,8 @@ const port = process.env.PORT || 4000;
 server.use(morgan("dev"));
 server.use(express.json());
 
+const userRouter = require("./routes/userRouter");
+
+server.use("/users", userRouter);
+
 server.listen(port, () => { debug(chalk.blue.bold(`Server is running on port ${port}`)); });

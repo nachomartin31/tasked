@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const { generateId } = require("../helpers/generateId");
+const { generateJWT } = require("../helpers/generateJWT");
 
 const getUser = async ({ query }, res) => {
   try {
@@ -46,7 +47,8 @@ const logIn = async ({ body }, res) => {
     result = ({
       _id,
       name,
-      email: userEmail
+      email: userEmail,
+      token: generateJWT(_id)
     });
   } else {
     const error = new Error("Invalid password");

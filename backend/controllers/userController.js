@@ -115,6 +115,17 @@ const newPassword = async ({ params: { token }, body: { password } }, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+const profile = async ({ body: { email, password } }, res) => {
+  const user = await User.findOne({ email });
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  if (await user.checkPassword(password) === false) {
+    return res.status(403).json({ message: "Invalid password" });
+  }
+  return res.status(200).json(user);
+};
 module.exports = {
   getUser,
   createUser,
@@ -122,5 +133,6 @@ module.exports = {
   confirm,
   resetPassword,
   checkToken,
-  newPassword
+  newPassword,
+  profile
 };

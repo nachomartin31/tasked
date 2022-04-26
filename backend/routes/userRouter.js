@@ -3,6 +3,8 @@ const { Router } = require("express");
 const userRouter = Router();
 const userController = require("../controllers/userController");
 
+const { checkAuth } = require("../middleware/checkAuth");
+
 const {
   getUser,
   createUser,
@@ -10,7 +12,8 @@ const {
   confirm,
   resetPassword,
   checkToken,
-  newPassword
+  newPassword,
+  profile
 } = userController;
 
 userRouter.route("/")
@@ -29,5 +32,7 @@ userRouter.route("/reset-password")
 userRouter.route("/reset-password/:token")
   .get(checkToken)
   .post(newPassword);
+
+userRouter.get("/profile", checkAuth, profile);
 
 module.exports = userRouter;

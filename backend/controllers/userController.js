@@ -11,12 +11,18 @@ const getUser = async ({ query }, res) => {
 };
 
 const createUser = async ({ body }, res) => {
+  const { email } = body;
+  const alreadySignedUp = User.findOne({ email });
+  if (alreadySignedUp) {
+    const error = new Error("This email is already signed");
+    res.status(400).json({ message: error.message });
+  }
   try {
     const newUser = await User.create(body);
     res.json(newUser);
-  } catch (error) {
-    res.send(error);
-    res.status(500);
+  } catch {
+    const error = new Error("Server did not respond");
+    res.status(500).json({ message: error.message });
   }
 };
 

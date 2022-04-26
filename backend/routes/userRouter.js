@@ -8,13 +8,15 @@ const {
   createUser,
   logIn,
   confirm,
-  resetPassword
+  resetPassword,
+  checkToken
 } = userController;
 
 userRouter.get("/", getUser);
 userRouter.post("/", createUser);
 userRouter.post("/login", logIn);
 userRouter.get("/confirm/:token", confirm);
+userRouter.get("/reset-password/:token", checkToken);
 userRouter.post("/reset-password", resetPassword);
 
 module.exports = userRouter;

@@ -4,8 +4,7 @@ const debug = require("debug")("tasked");
 const morgan = require("morgan");
 const chalk = require("chalk");
 
-
-require("./config/mongooseConfig")
+require("./config/mongooseConfig");
 
 const server = express();
 const port = process.env.PORT || 4000;

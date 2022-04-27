@@ -116,15 +116,8 @@ const newPassword = async ({ params: { token }, body: { password } }, res) => {
   }
 };
 
-const profile = async ({ body: { email, password } }, res) => {
-  const user = await User.findOne({ email });
-  if (!user) {
-    return res.status(404).json({ message: "User not found" });
-  }
-  if (await user.checkPassword(password) === false) {
-    return res.status(403).json({ message: "Invalid password" });
-  }
-  return res.status(200).json(user);
+const profile = async ({ user }, res) => {
+  res.status(200).json(user);
 };
 module.exports = {
   getUser,

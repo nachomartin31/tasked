@@ -18,8 +18,7 @@ const projectSchema = Schema(
     },
     client: {
       type: String,
-      trim: true,
-      required: true
+      trim: true
     },
     creator: { type: Schema.Types.ObjectId, ref: "User" },
     collaborators: [{ type: Schema.Types.ObjectId, ref: "User" }]
